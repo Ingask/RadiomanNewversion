@@ -2,46 +2,51 @@ package ru.netology.domain;
 
 public class Radio {
     private int currentStation;
-    private int stationMax = 9;
+    private int stationMax = 10;
     private int stationMin = 0;
     private int currentVolume;
-    private int volumeMax = 10;
+    private int volumeMax = 100;
     private int volumeMin = 0;
 
 
 
-    public int getCurrentStation() {
-        return currentStation;
+    public Radio(){
     }
 
-    public void setCurrentStation(int currentStation) {
-        if (currentStation > stationMax) {
+    public Radio(int stationMax) {
+        this.stationMax=stationMax;
+    }
+
+    public int getStationMax() {
+        return stationMax;
+    }
+
+    public int getCurrentStation() {
+        return this.currentStation;
+    }
+
+    public void setCurrentStation(int pressedStation) {
+        if (pressedStation > stationMax || pressedStation < stationMin){
             return;
         }
-        if (currentStation < stationMin) {
-            return;
-        }
-        this.currentStation = currentStation;
+        this.currentStation = pressedStation;
     }
 
 
     public int getCurrentVolume() {
-        return currentVolume;
+        return this.currentVolume;
     }
 
-    public void setCurrentVolume(int currentVolume) {
-        if (currentVolume > volumeMax) {
+    public void setCurrentVolume(int pressedVolume) {
+        if (pressedVolume > volumeMax || pressedVolume<volumeMin) {
             return;
         }
-        if (currentVolume < volumeMin) {
-            return;
-        }
-        this.currentVolume = currentVolume;
+        this.currentVolume = pressedVolume;
     }
 
     public void stationNumberNext() {
 
-        if (currentStation >= stationMax) {
+        if (currentStation == stationMax) {
             setCurrentStation(stationMin);
         } else {
             setCurrentStation(currentStation + 1);
@@ -49,7 +54,7 @@ public class Radio {
     }
 
     public void stationNumberPrev() {
-        if (currentStation <= stationMin) {
+        if (currentStation == stationMin) {
             setCurrentStation(stationMax);
         } else {
             setCurrentStation(currentStation - 1);
